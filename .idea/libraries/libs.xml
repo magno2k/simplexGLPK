@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES />
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$USER_HOME$/simplex/libglpk-java-1.10.0/swig/libs" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>

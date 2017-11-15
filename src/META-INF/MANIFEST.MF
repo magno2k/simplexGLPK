@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: glpk-java.jar
+Main-Class: Main
+
