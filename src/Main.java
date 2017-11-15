@@ -77,19 +77,6 @@ public class Main {
             GLPK.glp_set_mat_row(lp, 2, 2, ind, val);
 
 
-	          /*
-	            GLPK.glp_set_row_name(lp, 3, "c3");
-	            GLPK.glp_set_row_bnds(lp, 3, GLPKConstants.GLP_UP, 0, rest[2].get_elemento_livre());
-
-	            GLPK.intArray_setitem(ind, 1, 1);
-	            GLPK.intArray_setitem(ind, 2, 2);
-	            GLPK.intArray_setitem(ind, 3, 3);
-	            GLPK.doubleArray_setitem(val, 1, rest[2].getCoeficiente()[0]);
-	            GLPK.doubleArray_setitem(val, 2, rest[2].getCoeficiente()[1]);
-	            GLPK.glp_set_mat_row(lp, 3, 2, ind, val);
-	            */
-
-
             GLPK.delete_doubleArray(val);
             GLPK.delete_intArray(ind);
 
@@ -112,10 +99,10 @@ public class Main {
 
             // Retrieve solution
             if (ret == 0) {
-                write_lp_solution(lp);
+                simplex_solucao(lp);
             } else {
                 System.out.println("O problema não pode ser resolvido");
-            };
+            }
 
 
             // Libera a memoria
@@ -128,10 +115,10 @@ public class Main {
     }
 
     /**
-     * Escreve a solução inteira
      *
+     * Solução do Simplex
      */
-    static void write_lp_solution(glp_prob lp) {
+    static void simplex_solucao(glp_prob lp) {
         int i;
         int n;
         String name;
@@ -139,10 +126,8 @@ public class Main {
 
         name = GLPK.glp_get_obj_name(lp);
         val = GLPK.glp_get_obj_val(lp);
-       // System.out.print(name);
-       // System.out.print(" = ");
-       // System.out.println(val);
-        System.out.println("Custo dos comerciais: " + "R$"+val);
+
+        System.out.println("Custo dos comerciais: " + "R$" + val);
         n = GLPK.glp_get_num_cols(lp);
         for (i = 1; i <= n; i++) {
             name = GLPK.glp_get_col_name(lp, i);
@@ -150,10 +135,10 @@ public class Main {
             switch(i)
             {
                 case 1:
-                    System.out.println("Comerciais no horario da novela: " + (int)val);
+                    System.out.println("Comerciais no horario da novela: " + (int) Math.ceil(val));
                     break;
                 case 2:
-                    System.out.println("Comerciais no horario do futebol: " + (int)val);
+                    System.out.println("Comerciais no horario do futebol: " + (int) Math.ceil(val));
             }
 
         }
